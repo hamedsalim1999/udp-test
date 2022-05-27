@@ -6,7 +6,7 @@ import datetime
 ip_address = input("what is your ip address : ")
 port_number = int(input("what is your port number : "))
  
-start_file = f'server_log_{datetime.datetime.utcnow()}.log'
+
 # Define the IP address and the Port Number
 
 
@@ -22,9 +22,9 @@ datagramSocket.bind(listeningAddress)
 while(True):
 
     tempVal, sourceAddress = datagramSocket.recvfrom(128)
-    with open(start_file, "a") as file_object:
+    with open("server_log.log", "a") as file_object:
         file_object.write(f"{datetime.datetime.utcnow()} Temperature at {sourceAddress} is {tempVal.decode()}  \n")
 
     response = f"Received at: {datetime.datetime.utcnow()}"
 
-    datagramSocket.sendto(response.encode(), sourceAddress)
+    # datagramSocket.sendto(response.encode(), sourceAddress)

@@ -11,10 +11,10 @@ import time
 # Get temperature
 
 
-start_file = f'client_log_{datetime.utcnow()}.log'
+
 
 # A tuple with server ip and port
-def send(ip_address,port_address,mesaage,start_file):
+def send(ip_address,port_address,mesaage):
     serverAddress = (ip_address, port_address);
 
     
@@ -40,9 +40,9 @@ def send(ip_address,port_address,mesaage,start_file):
 
 # Read UDP server's response datagram
 
-    response = tempSensorSocket.recv(1024);
-    with open(start_file, 'a') as f:
-        print (response)
+    # response = tempSensorSocket.recv(1024);
+    with open("client_log.log", 'a') as f:
+        # print (response)
         f.write(f"{datetime.utcnow()} {mesaage}")
 
 
@@ -56,7 +56,7 @@ def main():
     Lines = file1.readlines()
     for line in Lines:
         time.sleep(delay)
-        send(ip_address,port_number,line,start_file)
+        send(ip_address,port_number,line)
 
 if __name__ == "__main__":
     main()
